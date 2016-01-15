@@ -172,6 +172,13 @@ function! s:select_tab(buf_index)
   endif
 endfunction
 
+function! s:delete_cur_tab()
+  let l = s:current_visible_buffers
+  let i = index(l, bufnr('%'))
+  if i > -1
+    exec 'bd' . l[float2nr(fmod(i, len(l)))]
+  endif
+endfunction
 function! s:jump_to_tab(offset)
     let l = s:current_visible_buffers
     let i = index(l, bufnr('%'))
@@ -192,4 +199,5 @@ if s:buffer_idx_mode
   noremap <unique> <Plug>AirlineSelectTab9 :call <SID>select_tab(8)<CR>
   noremap <unique> <Plug>AirlineSelectPrevTab :<C-u>call <SID>jump_to_tab(-v:count1)<CR>
   noremap <unique> <Plug>AirlineSelectNextTab :<C-u>call <SID>jump_to_tab(v:count1)<CR>
+  noremap <unique> <Plug>AirlineDeleteCurTab :call <SID>delete_cur_tab()<CR>
 endif
