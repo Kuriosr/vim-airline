@@ -176,9 +176,10 @@ function! s:delete_cur_tab()
   let l = s:current_visible_buffers
   let i = index(l, bufnr('%'))
   if i > -1
-    exec 'bd' . l[float2nr(fmod(i, len(l)))]
+    exec 'bd' . l[i]
   endif
 endfunction
+
 function! s:jump_to_tab(offset)
     let l = s:current_visible_buffers
     let i = index(l, bufnr('%'))
